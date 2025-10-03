@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Repositorio destinado al proyecto final de la diplomatura en Desarrolo web Full Stack",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
