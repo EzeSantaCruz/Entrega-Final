@@ -2,6 +2,7 @@ import express from 'express'
 import {connection} from './db.js'
 import {PORT} from './config.js'
 import bodyParser from 'body-parser'
+import { userRouter } from './src/routers/userRouter.js'
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.use(bodyParser.json())
 
 app.use(bodyParser.urlencoded({extended:true}))
 
+app.use("/api/user", userRouter)
 
 app.listen(puerto, () =>{
     console.log(`Corriendo el server en el puerto ${puerto}`)

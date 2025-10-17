@@ -2,7 +2,7 @@ import usuario from '../models/usersModel.js'
 
 export const crearUsuario = async (data) =>{
 
-    const userExists = await usuario.findOne({emial:data.emial})
+    const userExists = await usuario.findOne({email:data.email})
 
     if(userExists)
         {

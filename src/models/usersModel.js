@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         trim: true
     },
-    emial:{
+    email:{
         type:String,
         require:[true, "Complete Email, por favor"],
         maxLength: 50,
@@ -26,6 +26,6 @@ const userSchema = new mongoose.Schema({
         match: /^\S+@\S+\.\S+$/,
         unique:true
     }
-}, {timestamps:true})
+}, {timeStamps:true})
 
-export default mongoose.model("usuario", userSchema)
+export default mongoose.model("usuarios", userSchema)
