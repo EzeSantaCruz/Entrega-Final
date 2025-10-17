@@ -1,5 +1,17 @@
 import usuario from '../models/usersModel.js'
 
+export const getUser = async () =>{
+    const usuarioExistentes = await usuario.find()
+
+    if(usuario ===0){
+        const error = new Error("No hay usuarios existentes")
+        error.statusCode = 204
+        throw error
+    }
+
+    return usuarioExistentes
+}
+
 export const crearUsuario = async (data) =>{
 
     const userExists = await usuario.findOne({email:data.email})
