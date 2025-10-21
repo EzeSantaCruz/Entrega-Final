@@ -27,3 +27,15 @@ export const crearUsuario = async (data) =>{
 
     return { message: "Usuario creado correctamente", usuario: nuevoUsuario }
 }
+
+
+export const getUserById = async (idUser) => {
+    const user = await usuario.findById({_id: idUser})
+
+    if(!user){
+        const error = new Error(`USUARIO CON ID ${idUser} NO EXISTE`)
+        error.statusCode = 204
+        throw error
+    }
+    return user
+}
