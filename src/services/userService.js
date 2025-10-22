@@ -39,3 +39,18 @@ export const getUserById = async (idUser) => {
     }
     return user
 }
+
+export const deleteUser = async (idUser) => {
+    const userExists = await usuario.findById({_id: idUser})
+    if(!userExists)
+    {
+        const error = new Error("Usuario no existe")
+        error.statusCode(404)
+        throw error
+    }
+
+    await usuario.findByIdAndDelete({_id: idUser})
+
+    return {message: "USUARIO ELIMINADO CORRECTAMENTE"}
+
+}
