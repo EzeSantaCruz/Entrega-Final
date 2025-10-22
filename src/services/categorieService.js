@@ -13,3 +13,15 @@ export const crearCategoria = async (datos) => {
     return categoriaCreada
 
 }
+
+
+export const getCategorias = async () => {
+    const cat = await categoria.find()
+    if(cat.length === 0){
+        const error = new Error("No hay categorias existentes")
+        error.statusCode = 204
+        throw error
+    }
+
+    return cat
+}
