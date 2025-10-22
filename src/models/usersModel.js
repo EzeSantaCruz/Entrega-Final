@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         match: /^\S+@\S+\.\S+$/,
         unique:true
+    },
+    password: {
+        required: [ true, "Password field is required" ],
+        type: String
     }
 }, {timeStamps:true})
 
