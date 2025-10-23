@@ -45,7 +45,7 @@ export const deleteUser = async (idUser) => {
     if(!userExists)
     {
         const error = new Error("Usuario no existe")
-        error.statusCode(404)
+        error.statusCode = 404
         throw error
     }
 

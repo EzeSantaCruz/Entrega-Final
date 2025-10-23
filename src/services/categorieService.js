@@ -25,3 +25,18 @@ export const getCategorias = async () => {
 
     return cat
 }
+
+export const deleteCat = async (idCat) => {
+    const catExists = await categoria.findById(idCat)
+
+    if(!catExists)
+    {
+        const error = new Error("Categoria no encontrada")
+        error.statusCode = 404
+        throw error
+    }
+
+    await categoria.findByIdAndDelete(idCat)
+    return {message: "CATEGORIA ELIMINADA CORRECTAMENTE"}
+
+}
