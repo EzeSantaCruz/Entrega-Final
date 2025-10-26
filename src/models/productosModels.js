@@ -3,14 +3,12 @@ import mongoose from 'mongoose'
 
 const productoSchema = new mongoose.Schema({
     nombre:{
-        nombre: {
             type: String,
             unique: true,
             lowercase: true,
             trim: true,
             maxLength: 35,
             require: [true, "Ingrese el Nombre pro favor"]
-        }
     },
     descripcion: {
         type: String,
