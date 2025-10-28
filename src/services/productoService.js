@@ -17,7 +17,7 @@ export const getProductos = async () => {
     const data = await productos.find()
     if(data.length === 0){
         const error = new Error("No hay productos")
-        error.statusCode = 204
+        error.statusCode = 404
         throw error
     }
 
@@ -28,7 +28,7 @@ export const getProductoId = async (idPorduct) => {
     const producto = await productos.findById({_id: idPorduct})
     if(!producto){
         const error = new Error(`Producto con ID ${idPorduct} no existe`)
-        error.statusCode = 204
+        error.statusCode = 404
         throw error
     }
 
@@ -39,7 +39,7 @@ export const deleteProduct = async (idPorduct) => {
     const exist = await productos.findById({_id: idPorduct})
     if(!exist){
         const error = new Error(`Producto con ID ${idPorduct} no existe`)
-        error.statusCode = 204
+        error.statusCode = 404
         throw error
     }
 
@@ -52,10 +52,9 @@ export const updateProduct = async (idPorduct, data) => {
     const exist = await productos.findById({_id: idPorduct})
     if(!exist){
         const error = new Error(`Producto con ID ${idPorduct} no existe`)
-        error.statusCode = 204
+        error.statusCode = 404
         throw error
     }
-    console.log(data)
     const resultado = await productos.findByIdAndUpdate({_id:idPorduct}, data, {new:true})
     return {resultado}
 }
