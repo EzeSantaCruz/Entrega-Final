@@ -34,3 +34,16 @@ export const getProductoId = async (idPorduct) => {
 
     return {producto}
 }
+
+export const deleteProduct = async (idPorduct) => {
+    const exist = await productos.findById({_id: idPorduct})
+    if(!exist){
+        const error = new Error(`Producto con ID ${idPorduct} no existe`)
+        error.statusCode = 204
+        throw error
+    }
+
+    await productos.findByIdAndDelete(idPorduct)
+
+    return {message: "CATEGORIA ELIMINADA CORRECTAMENTE"}
+}
