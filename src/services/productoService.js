@@ -23,3 +23,14 @@ export const getProductos = async () => {
 
     return data
 }
+
+export const getProductoId = async (idPorduct) => {
+    const producto = await productos.findById({_id: idPorduct})
+    if(!producto){
+        const error = new Error(`Producto con ID ${idPorduct} no existe`)
+        error.statusCode = 204
+        throw error
+    }
+
+    return {producto}
+}

@@ -1,4 +1,4 @@
-import { crearProducto, getProductos } from "../services/productoService.js";
+import { crearProducto, getProductos, getProductoId } from "../services/productoService.js";
 
 export const crearProductoController = async (req, res) => {
     try{
@@ -19,6 +19,20 @@ export const getProductosController = async (req, res) => {
     try{
         const data = await getProductos()
         return res.status(200).json(data)
+    }catch(error)
+    {
+        if(error.statusCode === 204){
+            return res.status(error.statusCode).json({message: error.message})
+        }
+        return res.status(500).json({error: "Ocurrio un error", message: error.message})
+    }
+}
+
+export const getProductoIdController = async (req, res) =>{
+    try{
+        const id= req.params.id
+        const product = await getProductoId(id)
+        return res.status(200).json(product)
     }catch(error)
     {
         if(error.statusCode === 204){
