@@ -7,3 +7,13 @@ export const crearOrden = async (data) =>{
 }
 
 
+export const getOrdenes = async ()=>{
+    const data = await orden.find().populate("items.producto")
+        if(data.length === 0){
+            const error = new Error("No hay oredenes")
+            error.statusCode = 404
+            throw error
+        }
+    
+        return data
+}
