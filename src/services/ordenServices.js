@@ -29,3 +29,15 @@ export const deleteOrdenes = async (idOrden)=>{
     await orden.findByIdAndDelete(idOrden)
     return {message: "ORDEN ELIMINADA CORRECTAMENTE"}
 }
+
+export const updateOrdenes = async (idOrden, data) =>{
+    const exist = await orden.findOne({_id: idOrden})
+    if(!exist){
+        const error = new Error(`Orden con ID ${idOrden} no existe`)
+        error.statusCode = 404
+        throw error
+    }
+
+    const result = await orden.findByIdAndUpdate({_id: idOrden}, data, {new: true})
+    return {result}
+}

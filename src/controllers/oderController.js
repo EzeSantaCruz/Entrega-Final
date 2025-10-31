@@ -1,4 +1,4 @@
-import { crearOrden, getOrdenes, deleteOrdenes } from "../services/ordenServices.js";
+import { crearOrden, getOrdenes, deleteOrdenes, updateOrdenes } from "../services/ordenServices.js";
 
 export const crearOrdenController = async (req, res) =>{
     try{
@@ -35,4 +35,18 @@ export const deleteOrdenesController = async (req, res) =>{
         }
         return res.status(500).json({error: "Ocurrio un error", message: error.message})
         }
+}
+
+export const updateOrdenesController = async (req, res) =>{
+    try{
+        const id = req.params.id
+        const data = req.body
+        const exec = await updateOrdenes(id, data)
+        return res.status(200).json(exec)
+    }catch(error){
+        if(error.statusCode === 404){
+            return res.status(error.statusCode).json({message: error.message})
+        }
+        return res.status(500).json({error: "Ocurrio un error", message: error.message})
+    }
 }
