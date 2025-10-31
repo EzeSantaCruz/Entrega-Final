@@ -14,7 +14,7 @@ export const crearProducto = async (data)  => {
 }
 
 export const getProductos = async () => {
-    const data = await productos.find()
+    const data = await productos.find().populate("categoria")
     if(data.length === 0){
         const error = new Error("No hay productos")
         error.statusCode = 404
@@ -25,13 +25,12 @@ export const getProductos = async () => {
 }
 
 export const getProductoId = async (idPorduct) => {
-    const producto = await productos.findById({_id: idPorduct})
+    const producto = await productos.findById({_id: idPorduct}).populate("categoria")
     if(!producto){
         const error = new Error(`Producto con ID ${idPorduct} no existe`)
         error.statusCode = 404
         throw error
     }
-
     return {producto}
 }
 
