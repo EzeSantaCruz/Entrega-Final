@@ -1,5 +1,5 @@
 import express from "express";
-import { crearOrdenController, getOrdenesController, deleteOrdenesController, updateOrdenesController } from "../controllers/oderController.js";
+import { crearOrdenController, getOrdenesController, deleteOrdenesController, updateOrdenesController, getOrdenesByIdController } from "../controllers/oderController.js";
 
 
 
@@ -9,3 +9,4 @@ ordenRouter.post("/crear",crearOrdenController)
 ordenRouter.get("/", getOrdenesController)
 ordenRouter.delete("/delete/:id", deleteOrdenesController)
 ordenRouter.patch("/update/:id", updateOrdenesController)
+ordenRouter.get("/:id", updateOrdenesController)

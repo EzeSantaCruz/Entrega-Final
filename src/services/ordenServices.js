@@ -18,6 +18,16 @@ export const getOrdenes = async ()=>{
         return data
 }
 
+export const getOredenesById = async (idOrden) =>{
+    const exist = orden.findById({_id: idPorduct}).populate("items.producto")
+    if(!exist){
+        const error = new Error(`Orden con ID ${idPorduct} no existe`)
+        error.statusCode = 404
+        throw error
+    }
+    return {exist}
+}
+
 export const deleteOrdenes = async (idOrden)=>{
     const exist = await orden.findOne({_id: idOrden})
     if(!exist){
