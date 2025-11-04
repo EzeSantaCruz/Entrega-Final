@@ -1,11 +1,36 @@
 import usuario from '../models/usersModel.js'
+import bcrypt from 'bcrypt'
+export const login = async (data) =>{
+    if(!data.email && !data.password){
+        const error = new Error("Complete los campos 'Usuario' y 'Password'")
+        error.statusCode = 404
+        throw error
+    }
+    
+    const userExists = await usuario.findOne({email: data.email})
+    if(!userExists)
+        {
+            const error = new Error("Usuario o Password incorrecto, por favor intentelo nuevamente")
+            error.statusCode = 404
+            throw error
+        }
+    
+        const PasswordBd = userExists.password
+        if(!bcrypt.compareSync(data.password, PasswordBd)){
+            const error = new Error("Usuario o Password incorrecto, por favor intentelo nuevamente")
+            error.statusCode = 400;
+            throw error
+        }
+
+        return {Login: "True", message: "Inicio sesion correctamente"}
+}
 
 export const getUser = async () =>{
     const usuarioExistentes = await usuario.find()
 
     if(usuarioExistentes.length === 0){
         const error = new Error("No hay usuarios existentes")
-        error.statusCode = 204
+        error.statusCode = 404
         throw error
     }
 
@@ -34,7 +59,7 @@ export const getUserById = async (idUser) => {
 
     if(!user){
         const error = new Error(`USUARIO CON ID ${idUser} NO EXISTE`)
-        error.statusCode = 204
+        error.statusCode = 404
         throw error
     }
     return user

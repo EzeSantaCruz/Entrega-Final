@@ -1,4 +1,17 @@
-import {crearUsuario, getUser, getUserById, deleteUser} from '../services/userService.js'
+import {crearUsuario, getUser, getUserById, deleteUser, login} from '../services/userService.js'
+
+export const LoginController = async (req, res) => {
+    try{
+        const data = req.body
+        const exec = await login(data)
+        return res.status(200).json(exec)
+    }catch(error){
+        if(error.statusCode === 404){
+            return res.status(error.statusCode).json(error.message)
+        }
+        return res.status(500).json({message: "Ocurrio un error, intentelo mas tarde", error: error.message})
+    }
+}
 
 export const getUserController = async (req, res) => {
     try{
@@ -6,7 +19,7 @@ export const getUserController = async (req, res) => {
         res.status(200).json(response)
     }catch(error)
     {
-        if(error.statusCode === 204){
+        if(error.statusCode === 404){
             return res.status(error.statusCode).json([])
         }
         return res.status(500).json({message: "Ocurrio un error, intentelo mas tarde", error: error.message})
@@ -35,7 +48,7 @@ export const getUserByIdController = async (req,res) =>{
         const user = await getUserById(userId)
         return res.status(200).json(user)
     }catch(error){
-        if(error.statusCode === 204){
+        if(error.statusCode === 404){
             return res.status(error.statusCode).json([])
         }
         return res.status(500).json({message: "Ocurrio un error, intentelo mas tarde", error: error.message})

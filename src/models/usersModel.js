@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import { isGoodPassword } from '../utils/validaores.js'
+import bcrypt from 'bcrypt'
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -27,9 +29,21 @@ const userSchema = new mongoose.Schema({
         unique:true
     },
     password: {
-        required: [ true, "Password field is required" ],
-        type: String
+        required: [ true, "La password no debe estar vacia" ],
+        type: String,
+        validate: {
+            validator: function (v){
+                return isGoodPassword(v)
+            },
+            message: "Password no valida, falta algun requerimiento"
+        }
     }
 }, {timeStamps:true})
+
+
+userSchema.pre('save', function(next){
+    this.password = bcrypt.hashSync(this.password, 10)
+    next()
+})
 
 export default mongoose.model("usuarios", userSchema)
