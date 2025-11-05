@@ -1,5 +1,7 @@
 import usuario from '../models/usersModel.js'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import { SECRET, EXPIRED } from '../../config.js'
 export const login = async (data) =>{
     if(!data.email && !data.password){
         const error = new Error("Complete los campos 'Usuario' y 'Password'")
@@ -21,8 +23,15 @@ export const login = async (data) =>{
             error.statusCode = 400;
             throw error
         }
+        
+        const datosToken = {
+            id: userExists._id,
+            email: userExists.email
+        }
 
-        return {Login: "True", message: "Inicio sesion correctamente"}
+        const token = jwt.sign(datosToken, SECRET, {expiresIn: EXPIRED})
+
+        return {Login: "True", message: "Inicio sesion correctamente", token_de_usuario: token}
 }
 
 export const getUser = async () =>{
