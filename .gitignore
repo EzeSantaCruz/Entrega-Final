@@ -67,8 +67,6 @@ web_modules/
 
 # dotenv environment variable files
 .env
-.env.*
-!.env.example
 
 to_do_list_stock.md
 proyecto_pendientes.md
