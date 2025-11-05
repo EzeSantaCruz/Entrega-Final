@@ -213,14 +213,14 @@ Este proyecto por defecto puede no tener CORS habilitado. Si estás probando des
 npm install cors
 ```
 
-2) En `index.js` o el archivo donde configures Express, agregar:
+2) En `index.js` o el archivo donde configures Express, agregar (ejemplo recomendado que permitirá todas las conexiones y métodos principales):
 
 ```javascript
 import cors from 'cors'
-app.use(cors()) // permite todos los orígenes (para desarrollo)
-
-// Para habilitar solo un origen específico:
-// app.use(cors({ origin: 'http://localhost:3000' }))
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
+}))
 ```
 
-Si preferís no habilitar CORS todavía, está bien — para pruebas con Postman no es necesario.
+Nota de seguridad: `origin: "*"` permite cualquier origen y está bien para desarrollo o pruebas, pero en producción se recomienda restringirlo a los orígenes de tus frontends (por ejemplo `http://mi-frontend.com`) para evitar solicitudes no deseadas.

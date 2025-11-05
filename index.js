@@ -10,6 +10,12 @@ import { ordenRouter } from './src/routers/odenRouter.js'
 const app = express()
 
 const puerto = PORT
+app.use(cors({
+
+    origin: "*",
+    
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
+}))
 
 connection()
 
