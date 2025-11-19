@@ -6,7 +6,7 @@ import { userRouter } from './src/routers/userRouter.js'
 import { categoriaRouter } from './src/routers/categoriaRouter.js'
 import { productoRouter } from './src/routers/productoRouter.js'
 import { stockRouter } from './src/routers/stockRouter.js'
-import { ordenRouter } from './src/routers/odenRouter.js'
+import { ordenRouter } from './src/routers/ordenRouter.js'
 const app = express()
 
 const puerto = PORT

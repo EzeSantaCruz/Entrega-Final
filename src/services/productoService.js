@@ -21,7 +21,7 @@ export const getProductos = async () => {
         throw error
     }
 
-    return data
+    return {data}
 }
 
 export const getProductoId = async (idPorduct) => {

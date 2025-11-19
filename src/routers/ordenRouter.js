@@ -1,5 +1,5 @@
 import express from "express";
-import { crearOrdenController, getOrdenesController, deleteOrdenesController, updateOrdenesController, getOrdenesByIdController } from "../controllers/oderController.js";
+import { crearOrdenController, getOrdenesController, deleteOrdenesController, updateOrdenesController, getOrdenesByIdController } from "../controllers/orderController.js";
 import { tokenValidoMiddleware } from '../middlewares/tokenValidoMiddleware.js'
 
 

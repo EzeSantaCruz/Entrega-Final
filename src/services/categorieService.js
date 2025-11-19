@@ -10,7 +10,7 @@ export const crearCategoria = async (datos) => {
 
     const nuevaCategoria = new categoria(datos)
     const categoriaCreada = await nuevaCategoria.save()
-    return categoriaCreada
+    return {categoriaCreada}
 
 }
 
@@ -19,7 +19,7 @@ export const getCategorias = async () => {
     const cat = await categoria.find()
     if(cat.length === 0){
         const error = new Error("No hay categorias existentes")
-        error.statusCode = 204
+        error.statusCode = 404
         throw error
     }
 
