@@ -44,7 +44,7 @@ export const deleteProduct = async (idPorduct) => {
 
     await productos.findByIdAndDelete(idPorduct)
 
-    return {message: "CATEGORIA ELIMINADA CORRECTAMENTE"}
+    return {message: "PRODUCTO ELIMINADA CORRECTAMENTE"}
 }
 
 export const updateProduct = async (idPorduct, data) => {
